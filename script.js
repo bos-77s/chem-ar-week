@@ -1,761 +1,382 @@
 
-"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+  // قائمة التنقل في الجوال
+  const menuToggle = document.getElementById("menuToggle");
+  const navLinks = document.getElementById("navLinks");
 
-/* =====================================
-   أسبوع الكيمياء العربي
-   الأسئلة والألعاب والنتائج
-===================================== */
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen ? "إغلاق القائمة" : "فتح القائمة"
+      );
+    });
 
-const $ = (selector) => document.querySelector(selector);
-
-const questions = [
-  {
-    question: "ما الرمز الكيميائي للأكسجين؟",
-    options: ["O", "Ox", "Og", "C"],
-    answer: "O",
-    explanation: "الرمز O هو رمز عنصر الأكسجين."
-  },
-  {
-    question: "ما الصيغة الكيميائية للماء؟",
-    options: ["CO₂", "H₂O", "O₂", "NaCl"],
-    answer: "H₂O",
-    explanation: "يتكون جزيء الماء من ذرتي هيدروجين وذرة أكسجين."
-  },
-  {
-    question: "ما الرمز الكيميائي للكربون؟",
-    options: ["Ca", "Co", "C", "K"],
-    answer: "C",
-    explanation: "يرمز C إلى الكربون، بينما Co يرمز إلى الكوبالت."
-  },
-  {
-    question: "ما الرقم الهيدروجيني للمادة المتعادلة تقريبًا عند 25°C؟",
-    options: ["1", "5", "7", "14"],
-    answer: "7",
-    explanation: "تكون قيمة pH للماء النقي نحو 7 عند 25 درجة مئوية."
-  },
-  {
-    question: "ما الغاز الذي تمتصه النباتات في البناء الضوئي؟",
-    options: [
-      "الأكسجين",
-      "ثاني أكسيد الكربون",
-      "النيتروجين",
-      "الهيدروجين"
-    ],
-    answer: "ثاني أكسيد الكربون",
-    explanation: "تستخدم النباتات ثاني أكسيد الكربون والماء والضوء لصنع السكريات."
-  },
-  {
-    question: "ما الصيغة الكيميائية لغاز الأكسجين؟",
-    options: ["O", "O₂", "CO₂", "H₂"],
-    answer: "O₂",
-    explanation: "يتكون جزيء الأكسجين المعتاد من ذرتين من الأكسجين."
-  },
-  {
-    question: "أي المواد التالية حمض شائع؟",
-    options: [
-      "عصير الليمون",
-      "محلول الصابون",
-      "الماء النقي",
-      "محلول بيكربونات الصوديوم"
-    ],
-    answer: "عصير الليمون",
-    explanation: "يحتوي الليمون على حمض الستريك."
-  }
-];
-
-const elements = [
-  { symbol: "H", name: "الهيدروجين" },
-  { symbol: "O", name: "الأكسجين" },
-  { symbol: "C", name: "الكربون" },
-  { symbol: "Na", name: "الصوديوم" },
-  { symbol: "Fe", name: "الحديد" },
-  { symbol: "Au", name: "الذهب" },
-  { symbol: "He", name: "الهيليوم" },
-  { symbol: "Ca", name: "الكالسيوم" },
-  { symbol: "N", name: "النيتروجين" },
-  { symbol: "Ag", name: "الفضة" }
-];
-
-const carbonActivities = [
-  {
-    text: "استخدام الطاقة الشمسية",
-    good: true,
-    explanation:
-      "الطاقة الشمسية مصدر متجدد وقد تقلل الاعتماد على الوقود الأحفوري."
-  },
-  {
-    text: "ترك الأنوار مضاءة دون حاجة",
-    good: false,
-    explanation:
-      "إطفاء الأنوار غير الضرورية يساعد على تقليل استهلاك الكهرباء."
-  },
-  {
-    text: "استخدام النقل الجماعي",
-    good: true,
-    explanation:
-      "قد يقلل النقل الجماعي الانبعاثات لكل شخص."
-  },
-  {
-    text: "حرق النفايات عشوائيًا",
-    good: false,
-    explanation:
-      "قد يؤدي حرق النفايات إلى إطلاق ملوثات وغازات ضارة."
-  },
-  {
-    text: "زراعة الأشجار والعناية بها",
-    good: true,
-    explanation:
-      "تمتص الأشجار ثاني أكسيد الكربون أثناء نموها."
-  }
-];
-
-/* =====================================
-   التخزين
-===================================== */
-
-function readStorage(key, fallback) {
-  try {
-    const value = localStorage.getItem(key);
-    return value === null ? fallback : value;
-  } catch {
-    return fallback;
-  }
-}
-
-function writeStorage(key, value) {
-  try {
-    localStorage.setItem(key, value);
-    return true;
-  } catch {
-    return false;
-  }
-}
-
-function removeStorage(key) {
-  try {
-    localStorage.removeItem(key);
-  } catch {
-    // يستمر الموقع بالعمل حتى لو تعذر التخزين.
-  }
-}
-
-function loadLeaderboard() {
-  try {
-    const data = JSON.parse(readStorage("chemLeaderboard", "[]"));
-    return Array.isArray(data) ? data : [];
-  } catch {
-    return [];
-  }
-}
-
-let playerName = readStorage("chemPlayerName", "");
-let leaderboard = loadLeaderboard();
-
-let currentQuestion = 0;
-let quizScore = 0;
-let answerLocked = false;
-
-let elementScore = 0;
-let carbonScore = 0;
-let carbonIndex = 0;
-
-/* =====================================
-   أدوات مساعدة
-===================================== */
-
-function escapeHTML(value) {
-  return String(value).replace(/[&<>"']/g, character => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#039;"
-  })[character]);
-}
-
-function shuffle(array) {
-  const result = [...array];
-
-  for (let i = result.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [result[i], result[j]] = [result[j], result[i]];
-  }
-
-  return result;
-}
-
-function scrollToGames() {
-  const section = $("#extraGames");
-
-  if (section) {
-    section.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+      });
     });
   }
-}
 
-function getPlayerName() {
-  const input = $("#studentName");
+  // المختبر الافتراضي
+  const substanceA = document.getElementById("substanceA");
+  const substanceB = document.getElementById("substanceB");
+  const mixButton = document.getElementById("mixButton");
+  const resetLab = document.getElementById("resetLab");
+  const beaker = document.getElementById("beaker");
+  const beakerLiquid = document.getElementById("beakerLiquid");
+  const foam = document.getElementById("foam");
+  const labParticles = document.getElementById("labParticles");
+  const labVisualCaption = document.getElementById("labVisualCaption");
+  const resultTitle = document.getElementById("resultTitle");
+  const resultText = document.getElementById("resultText");
+  const resultNote = document.getElementById("resultNote");
 
-  if (input && input.value.trim()) {
-    playerName = input.value.trim().slice(0, 30);
-    writeStorage("chemPlayerName", playerName);
-  }
-
-  if (!playerName) {
-    const enteredName = prompt("اكتب اسمك للبدء:");
-
-    if (!enteredName || !enteredName.trim()) {
-      return "";
+  const substances = {
+    vinegar: {
+      name: "الخل المخفف",
+      color: "rgba(235, 190, 94, 0.45)"
+    },
+    water: {
+      name: "الماء",
+      color: "rgba(22, 119, 255, 0.30)"
+    },
+    bakingSoda: {
+      name: "بيكربونات الصوديوم",
+      color: "rgba(235, 239, 244, 0.9)"
+    },
+    redCabbage: {
+      name: "مستخلص الملفوف الأحمر",
+      color: "rgba(145, 85, 195, 0.55)"
     }
+  };
 
-    playerName = enteredName.trim().slice(0, 30);
-    writeStorage("chemPlayerName", playerName);
+  function showLabResult(title, text, note, color, bubbles, caption) {
+    resultTitle.textContent = title;
+    resultText.textContent = text;
+    resultNote.textContent = note;
+    labVisualCaption.textContent = caption;
 
-    if (input) input.value = playerName;
-  }
+    beaker.classList.toggle("is-bubbling", bubbles);
+    beakerLiquid.style.background = color;
+    beakerLiquid.style.height = bubbles ? "55%" : "40%";
+    labParticles.replaceChildren();
 
-  return playerName;
-}
-
-/* =====================================
-   حفظ اسم الطالب
-===================================== */
-
-function saveName(event) {
-  event.preventDefault();
-
-  const input = $("#studentName");
-  const message = $("#nameMessage");
-
-  if (!input || !input.value.trim()) {
-    if (message) message.textContent = "اكتب اسمك أولًا.";
-    return;
-  }
-
-  playerName = input.value.trim().slice(0, 30);
-  const saved = writeStorage("chemPlayerName", playerName);
-
-  if (message) {
-    message.textContent = saved
-      ? `أهلًا ${playerName}، تم حفظ اسمك على هذا الجهاز.`
-      : `أهلًا ${playerName}، تعذر حفظ الاسم في المتصفح.`;
-  }
-}
-
-/* =====================================
-   لوحة المتصدرين
-===================================== */
-
-function saveScore(game, score, maxScore) {
-  const name = getPlayerName();
-  if (!name) return;
-
-  leaderboard.push({
-    name,
-    game,
-    score,
-    maxScore,
-    date: new Date().toLocaleDateString("ar-SA"),
-    timestamp: Date.now()
-  });
-
-  leaderboard.sort((a, b) => {
-    const ratioA = a.score / Math.max(a.maxScore, 1);
-    const ratioB = b.score / Math.max(b.maxScore, 1);
-
-    return ratioB - ratioA || b.score - a.score;
-  });
-
-  leaderboard = leaderboard.slice(0, 20);
-
-  const saved = writeStorage(
-    "chemLeaderboard",
-    JSON.stringify(leaderboard)
-  );
-
-  renderLeaderboard();
-
-  if (!saved) {
-    alert("تعذر حفظ النتائج في هذا المتصفح.");
-  }
-}
-
-function renderLeaderboard() {
-  const board = $("#leaderboard");
-  if (!board) return;
-
-  if (leaderboard.length === 0) {
-    board.innerHTML = `
-      <p class="empty-state">
-        لا توجد نتائج بعد. كن أول المتنافسين!
-      </p>
-    `;
-    return;
-  }
-
-  board.innerHTML = leaderboard.map((entry, index) => `
-    <div class="leaderboard-row">
-      <span>
-        ${index + 1}. ${escapeHTML(entry.name)}
-        <small style="display:block;color:#586783">
-          ${escapeHTML(entry.game || "تحدي الكيمياء")}
-          ${entry.date ? ` · ${escapeHTML(entry.date)}` : ""}
-        </small>
-      </span>
-      <strong>
-        ${Number(entry.score) || 0} / ${Number(entry.maxScore) || 0}
-      </strong>
-    </div>
-  `).join("");
-}
-
-function clearResults() {
-  if (!confirm("هل تريد مسح جميع النتائج المحفوظة على هذا الجهاز؟")) {
-    return;
-  }
-
-  leaderboard = [];
-  removeStorage("chemLeaderboard");
-  renderLeaderboard();
-}
-
-/* =====================================
-   تحدي الكيمياء
-===================================== */
-
-function startQuiz() {
-  if (!getPlayerName()) return;
-
-  currentQuestion = 0;
-  quizScore = 0;
-  answerLocked = false;
-
-  showQuestion();
-}
-
-function showQuestion() {
-  const container = $("#quizContainer");
-  if (!container) return;
-
-  if (currentQuestion >= questions.length) {
-    finishQuiz();
-    return;
-  }
-
-  answerLocked = false;
-
-  const item = questions[currentQuestion];
-  const progress = ((currentQuestion + 1) / questions.length) * 100;
-  const shuffledOptions = shuffle(item.options);
-
-  container.innerHTML = `
-    <div class="question-card">
-      <span class="question-progress">
-        السؤال ${currentQuestion + 1} من ${questions.length}
-      </span>
-
-      <div class="progress-track">
-        <div class="progress-fill" style="width:${progress}%"></div>
-      </div>
-
-      <h3>${escapeHTML(item.question)}</h3>
-
-      <div class="answer-options">
-        ${shuffledOptions.map((option, index) => `
-          <button class="answer-btn" type="button" data-index="${index}">
-            ${escapeHTML(option)}
-          </button>
-        `).join("")}
-      </div>
-
-      <p class="feedback" id="quizFeedback" aria-live="polite"></p>
-
-      <div class="quiz-footer">
-        <span>النقاط: <strong id="quizScore">${quizScore}</strong></span>
-        <button class="button button-primary" id="nextQuestion"
-          type="button" disabled>
-          ${currentQuestion === questions.length - 1
-            ? "عرض النتيجة"
-            : "السؤال التالي"}
-        </button>
-      </div>
-    </div>
-  `;
-
-  container.querySelectorAll(".answer-btn").forEach(button => {
-    button.addEventListener("click", () => {
-      checkAnswer(shuffledOptions[Number(button.dataset.index)]);
-    });
-  });
-
-  $("#nextQuestion").addEventListener("click", () => {
-    if (!answerLocked) return;
-    currentQuestion++;
-    showQuestion();
-  });
-}
-
-function checkAnswer(selected) {
-  if (answerLocked) return;
-
-  answerLocked = true;
-
-  const item = questions[currentQuestion];
-  const isCorrect = selected === item.answer;
-  const feedback = $("#quizFeedback");
-
-  if (isCorrect) {
-    quizScore++;
-    feedback.textContent = `إجابة صحيحة! ${item.explanation}`;
-  } else {
-    feedback.textContent =
-      `الإجابة الصحيحة: ${item.answer}. ${item.explanation}`;
-  }
-
-  document.querySelectorAll("#quizContainer .answer-btn").forEach(button => {
-    button.disabled = true;
-
-    const option = button.textContent.trim();
-
-    if (option === item.answer) {
-      button.classList.add("correct");
-    } else if (option === selected) {
-      button.classList.add("incorrect");
+    if (bubbles) {
+      for (let i = 0; i < 12; i++) {
+        const particle = document.createElement("span");
+        particle.className = "lab-particle";
+        particle.style.left = `${20 + Math.random() * 60}%`;
+        particle.style.animationDelay = `${Math.random() * 1.2}s`;
+        particle.style.animationDuration = `${1 + Math.random()}s`;
+        labParticles.appendChild(particle);
+      }
     }
-  });
+  }
 
-  const scoreDisplay = $("#quizScore");
-  if (scoreDisplay) scoreDisplay.textContent = quizScore;
+  function runSimulation() {
+    const a = substanceA.value;
+    const b = substanceB.value;
 
-  $("#nextQuestion").disabled = false;
-}
-
-function finishQuiz() {
-  const container = $("#quizContainer");
-  if (!container) return;
-
-  saveScore("تحدي الكيمياء", quizScore, questions.length);
-
-  const percentage = Math.round(
-    quizScore / questions.length * 100
-  );
-
-  container.innerHTML = `
-    <div class="result-card">
-      <div class="start-symbol">✳</div>
-      <h3>أحسنت يا ${escapeHTML(playerName)}!</h3>
-      <div class="result-score">${quizScore} / ${questions.length}</div>
-      <p>نسبة الإجابات الصحيحة: ${percentage}%</p>
-      <p>
-        ${quizScore === questions.length
-          ? "درجة كاملة! أجبت عن جميع الأسئلة بشكل صحيح."
-          : quizScore >= Math.ceil(questions.length * 0.6)
-            ? "أداء جيد! واصل استكشاف عالم الكيمياء."
-            : "كل محاولة فرصة للتعلم. جرّب مرة أخرى!"}
-      </p>
-      <button class="button button-primary" id="restartQuiz" type="button">
-        أعد الاختبار
-      </button>
-    </div>
-  `;
-
-  $("#restartQuiz").addEventListener("click", startQuiz);
-}
-
-/* =====================================
-   لعبة اكتشف العنصر
-===================================== */
-
-function startElementGame() {
-  const container = $("#extraGamePanel");
-  if (!container || !getPlayerName()) return;
-
-  elementScore = 0;
-
-  const shuffledElements = shuffle(elements);
-  let index = 0;
-
-  function showElement() {
-    if (index >= shuffledElements.length) {
-      container.innerHTML = `
-        <div class="result-card">
-          <div class="start-symbol">⚗</div>
-          <h3>انتهت رحلة العناصر!</h3>
-          <div class="result-score">
-            ${elementScore} / ${shuffledElements.length}
-          </div>
-          <p>تعلمت اليوم رموزًا كيميائية جديدة.</p>
-          <button class="button button-primary" id="restartElements"
-            type="button">العب مرة أخرى</button>
-        </div>
-      `;
-
-      saveScore("اكتشف العنصر", elementScore, shuffledElements.length);
-      $("#restartElements").addEventListener("click", startElementGame);
+    if (a === b) {
+      showLabResult(
+        "اختر مادتين مختلفتين",
+        "اختر مادتين مختلفتين لتستكشف تفاعلهما في هذه المحاكاة.",
+        "تغيير الاختيارات لا يسبب تفاعلًا حقيقيًا؛ هذه محاكاة رقمية.",
+        substances[a].color,
+        false,
+        "بانتظار اختيار مادتين مختلفتين"
+      );
       return;
     }
 
-    const current = shuffledElements[index];
-    const choices = shuffle([
-      current,
-      ...shuffle(
-        elements.filter(item => item.symbol !== current.symbol)
-      ).slice(0, 3)
-    ]);
+    const pair = [a, b].sort().join("+");
 
-    container.innerHTML = `
-      <div class="question-card">
-        <span class="question-progress">
-          العنصر ${index + 1} من ${shuffledElements.length}
-        </span>
+    if (pair === ["bakingSoda", "vinegar"].sort().join("+")) {
+      showLabResult(
+        "انطلاق غاز!",
+        "عند تفاعل حمض الأسيتيك الموجود في الخل مع بيكربونات الصوديوم، يتكوّن ثاني أكسيد الكربون والماء وخلات الصوديوم. ظهور الفقاعات في الرسم يرمز إلى الغاز.",
+        "المعادلة المبسطة: NaHCO₃ + CH₃COOH → CH₃COONa + H₂O + CO₂. الرسم توضيحي وليس قياسًا لكمية الغاز.",
+        "rgba(22, 163, 106, 0.45)",
+        true,
+        "فقاعات افتراضية تمثّل انطلاق CO₂"
+      );
+      return;
+    }
 
-        <h3>ما اسم هذا العنصر؟</h3>
-        <div class="element-symbol">${escapeHTML(current.symbol)}</div>
+    if (pair === ["redCabbage", "vinegar"].sort().join("+")) {
+      showLabResult(
+        "يتغير لون المؤشر",
+        "مستخلص الملفوف الأحمر يحتوي على أصباغ تتغير ألوانها حسب درجة الحموضة. في الوسط الحمضي يميل اللون عادةً إلى الأحمر أو الوردي.",
+        "اللون الفعلي يعتمد على تركيز المواد ودرجة الحموضة؛ اللون هنا تمثيل تعليمي.",
+        "rgba(226, 80, 110, 0.55)",
+        false,
+        "تمثيل افتراضي لوسط حمضي"
+      );
+      return;
+    }
 
-        <div class="answer-options">
-          ${choices.map((item, choiceIndex) => `
-            <button class="answer-btn" type="button" data-index="${choiceIndex}">
-              ${escapeHTML(item.name)}
-            </button>
-          `).join("")}
-        </div>
+    if (pair === ["bakingSoda", "redCabbage"].sort().join("+")) {
+      showLabResult(
+        "تغيّر لون متوقع",
+        "بيكربونات الصوديوم مادة قاعدية ضعيفة، وقد يتغير لون مؤشر الملفوف الأحمر إلى الأزرق أو الأخضر المزرق حسب درجة الحموضة.",
+        "المحاكاة لا تقيس قيمة pH الفعلية ولا تحدد اللون بدقة مخبرية.",
+        "rgba(54, 164, 145, 0.55)",
+        false,
+        "تمثيل افتراضي لوسط قاعدي ضعيف"
+      );
+      return;
+    }
 
-        <p class="feedback" id="elementFeedback" aria-live="polite"></p>
+    if (pair === ["redCabbage", "water"].sort().join("+")) {
+      showLabResult(
+        "مؤشر في وسط قريب من المتعادل",
+        "الماء النقي قريب من التعادل، وقد يحتفظ مستخلص الملفوف بلون بنفسجي أو أرجواني. قد تتغير النتيجة بحسب الماء والمستخلص المستخدمين.",
+        "هذا توقع تعليمي؛ لا يمكن تحديد درجة الحموضة الدقيقة من اللون وحده.",
+        "rgba(139, 91, 194, 0.55)",
+        false,
+        "تمثيل افتراضي لمؤشر الملفوف"
+      );
+      return;
+    }
 
-        <div class="quiz-footer">
-          <span>النقاط: ${elementScore}</span>
-          <button class="button button-primary" id="nextElement"
-            type="button" disabled>التالي</button>
-        </div>
-      </div>
-    `;
+    if (pair === ["vinegar", "water"].sort().join("+")) {
+      showLabResult(
+        "تخفيف الحمض",
+        "عند مزج الخل بالماء يتخفف حمض الأسيتيك. لا نتوقع ظهور فقاعات غازية واضحة من هذا المزج وحده.",
+        "التخفيف يقلل التركيز، لكنه لا يعني أن المحلول أصبح متعادلًا.",
+        "rgba(226, 185, 104, 0.45)",
+        false,
+        "تمثيل افتراضي لمحلول مخفف"
+      );
+      return;
+    }
 
-    let answered = false;
+    if (pair === ["bakingSoda", "water"].sort().join("+")) {
+      showLabResult(
+        "ذوبان جزئي",
+        "بيكربونات الصوديوم تذوب في الماء بدرجة جيدة. لا يُتوقع انطلاق غاز ملحوظ من الماء وبيكربونات الصوديوم وحدهما في الظروف العادية.",
+        "المشهد توضيحي؛ لا يمثل قياسًا للذوبانية أو سرعة الذوبان.",
+        "rgba(190, 205, 222, 0.75)",
+        false,
+        "تمثيل افتراضي لمحلول بيكربونات"
+      );
+      return;
+    }
 
-    container.querySelectorAll(".answer-btn").forEach(button => {
-      button.addEventListener("click", () => {
-        if (answered) return;
-        answered = true;
+    showLabResult(
+      "مزيج دون تفاعل واضح",
+      "لا تتوقع بالضرورة تفاعلًا كيميائيًا واضحًا من مجرد مزج المادتين. قد يحدث امتزاج أو استخلاص لبعض المكونات.",
+      "التفاعل الحقيقي يعتمد على التركيز والظروف وخصائص المواد.",
+      "rgba(133, 110, 190, 0.45)",
+      false,
+      "تمثيل افتراضي للمزيج"
+    );
+  }
 
-        const selected = choices[Number(button.dataset.index)];
-        const feedback = $("#elementFeedback");
+  if (mixButton) {
+    mixButton.addEventListener("click", runSimulation);
+  }
 
-        if (selected.symbol === current.symbol) {
-          elementScore++;
-          feedback.textContent = `صحيح! ${current.name} هو اسم العنصر.`;
-        } else {
-          feedback.textContent =
-            `الإجابة الصحيحة: ${current.name} (${current.symbol}).`;
-        }
-
-        container.querySelectorAll(".answer-btn").forEach(optionButton => {
-          optionButton.disabled = true;
-
-          const option = choices[Number(optionButton.dataset.index)];
-
-          if (option.symbol === current.symbol) {
-            optionButton.classList.add("correct");
-          } else if (option.symbol === selected.symbol) {
-            optionButton.classList.add("incorrect");
-          }
-        });
-
-        $("#nextElement").disabled = false;
-      });
-    });
-
-    $("#nextElement").addEventListener("click", () => {
-      index++;
-      showElement();
+  if (resetLab) {
+    resetLab.addEventListener("click", () => {
+      substanceA.value = "vinegar";
+      substanceB.value = "bakingSoda";
+      showLabResult(
+        "جاهز للتجربة؟",
+        "اختر مادتين واضغط على زر تشغيل المحاكاة.",
+        "هذه محاكاة تعليمية مبسطة وليست قياسًا مخبريًا حقيقيًا.",
+        "rgba(22, 119, 255, 0.35)",
+        false,
+        "بانتظار اختيار المواد..."
+      );
     });
   }
 
-  showElement();
-}
+  // تفاصيل التجارب التعليمية
+  const experimentDetails = {
+    vinegar: {
+      title: "الخل وبيكربونات الصوديوم",
+      text: "الفكرة العلمية: يتفاعل حمض الأسيتيك مع بيكربونات الصوديوم لينتج غاز ثاني أكسيد الكربون، الذي يظهر على هيئة فقاعات. يمكن تمثيل ذلك بالمعادلة: NaHCO₃ + CH₃COOH → CH₃COONa + H₂O + CO₂. اسأل نفسك: ما الدليل على تكوّن الغاز؟ وهل تكوّن الفقاعات وحده يكفي لتحديد كمية الغاز؟"
+    },
+    indicator: {
+      title: "ألوان الملفوف الأحمر",
+      text: "يحتوي الملفوف الأحمر على أصباغ الأنثوسيانين، التي يتغير لونها مع تغير درجة الحموضة. تميل الألوان إلى الأحمر في الأوساط الحمضية، وقد تتحول إلى أزرق أو أخضر في أوساط أقل حموضة أو قاعدية. هذه الألوان تقريبية وتتأثر بالتركيز والمواد الموجودة."
+    },
+    solubility: {
+      title: "الماء والذوبان",
+      text: "الذوبان هو انتشار جسيمات مادة داخل مادة أخرى لتكوين مزيج متجانس. تعتمد الذوبانية على طبيعة المواد ودرجة الحرارة وعوامل أخرى. ليس كل ما يختلط بالماء يتفاعل كيميائيًا معه؛ فالذوبان والتفاعل الكيميائي عمليتان مختلفتان."
+    }
+  };
 
-/* =====================================
-   لعبة أمسك ما لا تراه
-===================================== */
+  const experimentDetail = document.getElementById("experimentDetail");
+  const detailTitle = document.getElementById("detailTitle");
+  const detailText = document.getElementById("detailText");
+  const closeDetail = document.getElementById("closeDetail");
 
-function startCarbonGame() {
-  const container = $("#extraGamePanel");
-  if (!container || !getPlayerName()) return;
+  document.querySelectorAll("[data-experiment]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const detail = experimentDetails[button.dataset.experiment];
+      if (!detail) return;
 
-  carbonScore = 0;
-  carbonIndex = 0;
+      detailTitle.textContent = detail.title;
+      detailText.textContent = detail.text;
+      experimentDetail.hidden = false;
+      experimentDetail.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  });
 
-  showCarbonActivity();
-}
-
-function showCarbonActivity() {
-  const container = $("#extraGamePanel");
-  if (!container) return;
-
-  if (carbonIndex >= carbonActivities.length) {
-    container.innerHTML = `
-      <div class="result-card">
-        <div class="start-symbol">🌱</div>
-        <h3>أكملت مهمة الكربون!</h3>
-        <div class="result-score">
-          ${carbonScore} / ${carbonActivities.length}
-        </div>
-        <p>المعرفة العلمية تساعدنا على اتخاذ قرارات أفضل للبيئة.</p>
-        <button class="button button-primary" id="restartCarbon"
-          type="button">أعد المهمة</button>
-      </div>
-    `;
-
-    saveScore("أمسك ما لا تراه", carbonScore, carbonActivities.length);
-    $("#restartCarbon").addEventListener("click", startCarbonGame);
-    return;
+  if (closeDetail) {
+    closeDetail.addEventListener("click", () => {
+      experimentDetail.hidden = true;
+    });
   }
 
-  const activity = carbonActivities[carbonIndex];
-  const progress = ((carbonIndex + 1) / carbonActivities.length) * 100;
+  // المسابقة القصيرة
+  const questions = [
+    {
+      question: "ما الغاز الذي ينتج عند تفاعل الخل مع بيكربونات الصوديوم؟",
+      options: ["الأكسجين", "ثاني أكسيد الكربون", "الهيدروجين"],
+      answer: 1,
+      explanation: "صحيح! ينتج غاز ثاني أكسيد الكربون، وهو المسؤول عن الفقاعات."
+    },
+    {
+      question: "ماذا نسمّي المادة التي تساعدنا على معرفة ما إذا كان الوسط حمضيًا أو قاعديًا بتغيّر لونها؟",
+      options: ["مؤشر كيميائي", "مذيب فقط", "عنصر فلزي"],
+      answer: 0,
+      explanation: "صحيح! يتغير لون المؤشر بحسب خصائص الوسط الكيميائية."
+    },
+    {
+      question: "أي عبارة تصف الذوبان وصفًا صحيحًا؟",
+      options: [
+        "كل ذوبان يعني حدوث تفاعل كيميائي",
+        "الذوبان يحدث للغازات فقط",
+        "يمكن أن تذوب مادة دون تكوين مادة جديدة"
+      ],
+      answer: 2,
+      explanation: "أحسنت! الذوبان لا يعني بالضرورة حدوث تفاعل كيميائي."
+    }
+  ];
 
-  container.innerHTML = `
-    <div class="question-card">
-      <span class="question-progress">
-        الموقف ${carbonIndex + 1} من ${carbonActivities.length}
-      </span>
+  const questionCounter = document.getElementById("questionCounter");
+  const progressBar = document.getElementById("progressBar");
+  const questionText = document.getElementById("questionText");
+  const quizOptions = document.getElementById("quizOptions");
+  const quizFeedback = document.getElementById("quizFeedback");
+  const nextQuestion = document.getElementById("nextQuestion");
+  const quizFinal = document.getElementById("quizFinal");
+  const finalScore = document.getElementById("finalScore");
+  const finalMessage = document.getElementById("finalMessage");
+  const restartQuiz = document.getElementById("restartQuiz");
 
-      <div class="progress-track">
-        <div class="progress-fill" style="width:${progress}%"></div>
-      </div>
-
-      <h3>${escapeHTML(activity.text)}</h3>
-      <p class="game-subtitle">
-        هل يساعد هذا التصرف في تقليل الانبعاثات أو الحد من آثارها؟
-      </p>
-
-      <div class="answer-options">
-        <button class="answer-btn" id="carbonYes" type="button">نعم</button>
-        <button class="answer-btn" id="carbonNo" type="button">لا</button>
-      </div>
-
-      <p class="feedback" id="carbonFeedback" aria-live="polite"></p>
-
-      <div class="quiz-footer">
-        <span>النقاط: ${carbonScore}</span>
-        <button class="button button-primary" id="nextCarbon"
-          type="button" disabled>التالي</button>
-      </div>
-    </div>
-  `;
-
+  let questionIndex = 0;
+  let score = 0;
   let answered = false;
 
-  function answer(choice) {
+  function renderQuestion() {
+    const current = questions[questionIndex];
+
+    questionCounter.textContent =
+      `السؤال ${questionIndex + 1} من ${questions.length}`;
+    progressBar.style.width =
+      `${((questionIndex + 1) / questions.length) * 100}%`;
+    questionText.textContent = current.question;
+    quizFeedback.textContent = "";
+    quizFeedback.className = "quiz-feedback";
+    quizOptions.replaceChildren();
+    quizOptions.hidden = false;
+    nextQuestion.hidden = false;
+    nextQuestion.disabled = true;
+    nextQuestion.textContent =
+      questionIndex === questions.length - 1 ? "عرض النتيجة" : "السؤال التالي ←";
+    quizFinal.hidden = true;
+    answered = false;
+
+    current.options.forEach((option, index) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "quiz-option";
+      button.textContent = option;
+      button.dataset.answer = String(index);
+      button.addEventListener("click", () => selectAnswer(index, button));
+      quizOptions.appendChild(button);
+    });
+  }
+
+  function selectAnswer(selectedIndex, selectedButton) {
     if (answered) return;
     answered = true;
 
-    const feedback = $("#carbonFeedback");
-    const correct = choice === activity.good;
+    const current = questions[questionIndex];
+    const buttons = quizOptions.querySelectorAll(".quiz-option");
 
-    if (correct) {
-      carbonScore++;
-      feedback.textContent = `إجابة صحيحة! ${activity.explanation}`;
+    buttons.forEach((button) => {
+      button.disabled = true;
+      if (Number(button.dataset.answer) === current.answer) {
+        button.classList.add("correct");
+      }
+    });
+
+    if (selectedIndex === current.answer) {
+      score++;
+      quizFeedback.textContent = current.explanation;
+      quizFeedback.className = "quiz-feedback success";
     } else {
-      feedback.textContent = `تذكّر: ${activity.explanation}`;
+      selectedButton.classList.add("wrong");
+      quizFeedback.textContent =
+        `ليس تمامًا. الإجابة الصحيحة: ${current.options[current.answer]}.`;
+      quizFeedback.className = "quiz-feedback error";
     }
 
-    $("#carbonYes").disabled = true;
-    $("#carbonNo").disabled = true;
-
-    const correctButton = activity.good ? $("#carbonYes") : $("#carbonNo");
-    const selectedButton = choice ? $("#carbonYes") : $("#carbonNo");
-
-    correctButton.classList.add("correct");
-
-    if (!correct) {
-      selectedButton.classList.add("incorrect");
-    }
-
-    $("#nextCarbon").disabled = false;
+    nextQuestion.disabled = false;
   }
 
-  $("#carbonYes").addEventListener("click", () => answer(true));
-  $("#carbonNo").addEventListener("click", () => answer(false));
+  function showFinalScore() {
+    questionText.hidden = true;
+    quizOptions.hidden = true;
+    quizFeedback.hidden = true;
+    nextQuestion.hidden = true;
+    quizFinal.hidden = false;
 
-  $("#nextCarbon").addEventListener("click", () => {
-    carbonIndex++;
-    showCarbonActivity();
-  });
-}
-
-/* =====================================
-   قائمة الجوال
-===================================== */
-
-function setupNavigation() {
-  const toggle = $("#menuToggle");
-  const nav = $("#mainNav");
-
-  if (!toggle || !nav) return;
-
-  toggle.addEventListener("click", () => {
-    const isOpen = nav.classList.toggle("open");
-
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    toggle.setAttribute(
-      "aria-label",
-      isOpen ? "إغلاق القائمة" : "فتح القائمة"
-    );
-  });
-
-  nav.querySelectorAll("a").forEach(link => {
-    link.addEventListener("click", () => {
-      nav.classList.remove("open");
-      toggle.setAttribute("aria-expanded", "false");
-      toggle.setAttribute("aria-label", "فتح القائمة");
-    });
-  });
-}
-
-/* =====================================
-   بدء الموقع
-===================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-  const nameInput = $("#studentName");
-
-  if (nameInput) {
-    nameInput.value = playerName;
+    finalScore.textContent = `نتيجتك: ${score} من ${questions.length}`;
+    finalMessage.textContent =
+      score === questions.length
+        ? "رائع! أجبت عن جميع الأسئلة بشكل صحيح."
+        : score === 2
+          ? "عمل جيد! راجع السؤال الذي أخطأت فيه لتثبيت المعلومة."
+          : "بداية جيدة! أعد التحدي وتعلّم من التفسيرات.";
   }
 
-  const nameForm = $("#nameForm");
-  if (nameForm) {
-    nameForm.addEventListener("submit", saveName);
-  }
+  if (nextQuestion) {
+    nextQuestion.addEventListener("click", () => {
+      if (!answered) return;
 
-  const quizButton = $("#startQuiz");
-  if (quizButton) {
-    quizButton.addEventListener("click", startQuiz);
-  }
-
-  const elementButton = $("#openElementGame");
-  if (elementButton) {
-    elementButton.addEventListener("click", () => {
-      startElementGame();
-      scrollToGames();
+      if (questionIndex < questions.length - 1) {
+        questionIndex++;
+        renderQuestion();
+      } else {
+        showFinalScore();
+      }
     });
   }
 
-  const carbonButton = $("#openCarbonGame");
-  if (carbonButton) {
-    carbonButton.addEventListener("click", () => {
-      startCarbonGame();
-      scrollToGames();
+  if (restartQuiz) {
+    restartQuiz.addEventListener("click", () => {
+      questionIndex = 0;
+      score = 0;
+      questionText.hidden = false;
+      quizFeedback.hidden = false;
+      renderQuestion();
+      document.getElementById("quiz").scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
     });
   }
 
-  const clearButton = $("#clearResults");
-  if (clearButton) {
-    clearButton.addEventListener("click", clearResults);
-  }
-
-  setupNavigation();
-  renderLeaderboard();
+  renderQuestion();
 });
