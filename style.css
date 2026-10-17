@@ -82,6 +82,10 @@ input:focus-visible {
   padding-block: 76px;
 }
 
+/* =========================
+   HEADER & SCHOOL LOGO
+========================= */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -103,18 +107,21 @@ input:focus-visible {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
+/* شعار المدرسة */
+.brand-logo {
+  display: block;
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+/* إخفاء الحرف القديم إذا بقي في HTML */
 .brand-symbol {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  background: var(--green);
-  color: white;
-  border-radius: 15px;
-  font-size: 27px;
-  font-weight: 800;
+  display: none;
 }
 
 .brand strong,
@@ -158,10 +165,18 @@ input:focus-visible {
   font-size: 23px;
 }
 
+/* =========================
+   HERO SECTION
+========================= */
+
 .hero {
   overflow: hidden;
   background:
-    radial-gradient(circle at 80% 20%, rgba(200, 162, 97, 0.13), transparent 28%),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(200, 162, 97, 0.13),
+      transparent 28%
+    ),
     linear-gradient(135deg, #FFFDF5 0%, #F0F5ED 100%);
 }
 
@@ -274,6 +289,10 @@ input:focus-visible {
   background: #6D9A6E;
 }
 
+/* =========================
+   CHEMISTRY ILLUSTRATION
+========================= */
+
 .hero-art {
   position: relative;
   min-height: 370px;
@@ -368,6 +387,10 @@ input:focus-visible {
   bottom: 8%;
 }
 
+/* =========================
+   STUDENT NAME FORM
+========================= */
+
 .welcome-section {
   padding-block: 42px;
 }
@@ -427,6 +450,10 @@ input:focus-visible {
   font-size: 12px;
 }
 
+/* =========================
+   SECTION HEADINGS
+========================= */
+
 .section-heading {
   max-width: 650px;
   margin: 0 auto 35px;
@@ -445,6 +472,10 @@ input:focus-visible {
 .section-heading > p {
   margin-bottom: 0;
 }
+
+/* =========================
+   ACTIVITY CARDS
+========================= */
 
 .activity-grid {
   display: grid;
@@ -530,6 +561,10 @@ input:focus-visible {
 .text-link:hover span {
   transform: translateX(-4px);
 }
+
+/* =========================
+   QUIZ SECTION
+========================= */
 
 .game-section {
   background: #F0F4EF;
@@ -630,6 +665,8 @@ input:focus-visible {
   font-size: 13px;
 }
 
+/* Questions and answers */
+
 .question-card {
   padding-top: 22px;
 }
@@ -728,6 +765,10 @@ input:focus-visible {
   color: var(--muted);
 }
 
+/* =========================
+   EXTRA GAMES
+========================= */
+
 .secondary-panel {
   max-width: 800px;
   margin-inline: auto;
@@ -751,6 +792,10 @@ input:focus-visible {
   color: var(--muted);
   font-size: 13px;
 }
+
+/* =========================
+   LEADERBOARD
+========================= */
 
 .leaderboard-section {
   background: white;
@@ -815,10 +860,18 @@ input:focus-visible {
   font-size: 13px;
 }
 
+/* =========================
+   CLOSING SECTION
+========================= */
+
 .closing-section {
   padding-block: 65px;
   background:
-    radial-gradient(circle at 80% 20%, rgba(200, 162, 97, 0.15), transparent 30%),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(200, 162, 97, 0.15),
+      transparent 30%
+    ),
     var(--green);
   color: white;
   text-align: center;
@@ -840,6 +893,10 @@ input:focus-visible {
   font-size: 14px;
 }
 
+/* =========================
+   FOOTER
+========================= */
+
 .site-footer {
   padding-block: 22px;
   background: var(--green-dark);
@@ -852,6 +909,10 @@ input:focus-visible {
   gap: 15px;
   font-size: 12px;
 }
+
+/* =========================
+   TABLETS AND MOBILE
+========================= */
 
 @media (max-width: 800px) {
   .hero-grid {
@@ -899,6 +960,8 @@ input:focus-visible {
     padding: 24px;
   }
 
+  /* Mobile navigation */
+
   .main-nav {
     position: absolute;
     top: 100%;
@@ -924,7 +987,24 @@ input:focus-visible {
   .menu-toggle {
     display: block;
   }
+
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+  }
+
+  .brand strong {
+    font-size: 14px;
+  }
+
+  .brand small {
+    font-size: 10px;
+  }
 }
+
+/* =========================
+   SMALL MOBILE SCREENS
+========================= */
 
 @media (max-width: 480px) {
   .container {
@@ -980,5 +1060,26 @@ input:focus-visible {
   .footer-inner {
     flex-direction: column;
     text-align: center;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .brand-logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand strong {
+    font-size: 12px;
+  }
+
+  .brand small {
+    font-size: 9px;
+  }
+
+  .header-inner {
+    gap: 10px;
   }
 }
