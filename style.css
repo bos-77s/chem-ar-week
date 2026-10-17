@@ -1,1085 +1,253 @@
 
-@font-face {
-  font-family: "Thmanyah Sans";
-  src: url("fonts/ThmanyahSans.woff2") format("woff2");
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-}
+/* =========================================
+   الهوية الجديدة: الكيمياء والفضاء
+   الأزرق الأساسي - الأخضر - الكحلي الفضائي
+   - الأبيض الثلجي
+========================================= */
 
 :root {
-  --green: #1B4D3E;
-  --green-dark: #12372D;
-  --green-light: #E8F0E9;
-  --gold: #C8A261;
-  --cream: #FFF6DD;
+  --green: #1677FF;
+  --green-dark: #101B3F;
+  --green-light: #EAF2FF;
+  --gold: #16A36A;
+  --cream: #F8FBFF;
   --white: #FFFFFF;
-  --ink: #23332D;
-  --muted: #68766F;
-  --line: #E4E9E3;
-  --blue: #E8EFF8;
+  --ink: #101B3F;
+  --muted: #586783;
+  --line: #DCE6F5;
+  --blue: #EAF2FF;
   --radius: 22px;
-  --shadow: 0 12px 35px rgba(27, 77, 62, 0.08);
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 95px;
+  --shadow: 0 12px 35px rgba(16, 27, 63, 0.09);
 }
 
 body {
-  margin: 0;
-  background: #FCFCF8;
+  background: var(--snow, #F8FBFF);
   color: var(--ink);
-  font-family: "Thmanyah Sans", sans-serif;
-  font-weight: 400;
-  line-height: 1.8;
 }
-
-button,
-input,
-textarea,
-select {
-  font: inherit;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
-}
-
-button {
-  cursor: pointer;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button:focus-visible,
-a:focus-visible,
-input:focus-visible {
-  outline: 3px solid var(--gold);
-  outline-offset: 4px;
-}
-
-.container {
-  width: min(1120px, calc(100% - 40px));
-  margin-inline: auto;
-}
-
-.section-space {
-  padding-block: 76px;
-}
-
-/* =========================
-   HEADER & SCHOOL LOGO
-========================= */
 
 .site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid var(--line);
-  backdrop-filter: blur(14px);
-}
-
-.header-inner {
-  min-height: 82px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-
-/* شعار المدرسة */
-.brand-logo {
-  display: block;
-  width: 52px;
-  height: 52px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-
-/* إخفاء الحرف القديم إذا بقي في HTML */
-.brand-symbol {
-  display: none;
+  background: rgba(248, 251, 255, 0.96);
+  border-color: var(--line);
 }
 
 .brand strong,
-.brand small {
-  display: block;
-}
-
-.brand strong {
-  color: var(--green);
-  font-size: 16px;
-}
-
-.brand small {
-  color: var(--muted);
-  font-size: 11px;
-}
-
-.main-nav {
-  display: flex;
-  align-items: center;
-  gap: 27px;
-}
-
-.main-nav a {
-  color: #52645A;
-  font-size: 14px;
-  transition: color 0.2s;
-}
-
-.main-nav a:hover {
+.main-nav a:hover,
+.text-link,
+.activity-card h3 {
   color: var(--green);
 }
 
-.menu-toggle {
-  display: none;
-  border: 0;
-  background: var(--green-light);
-  color: var(--green);
-  border-radius: 12px;
-  padding: 8px 13px;
-  font-size: 23px;
-}
-
-/* =========================
-   HERO SECTION
-========================= */
-
-.hero {
-  overflow: hidden;
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(200, 162, 97, 0.13),
-      transparent 28%
-    ),
-    linear-gradient(135deg, #FFFDF5 0%, #F0F5ED 100%);
-}
-
-.hero-grid {
-  min-height: 560px;
-  padding-block: 65px;
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  align-items: center;
-  gap: 40px;
-}
-
-.eyebrow {
-  display: inline-block;
-  margin-bottom: 12px;
-  color: #9A7436;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.hero h1 {
-  max-width: 650px;
-  margin: 0 0 20px;
-  color: var(--green-dark);
-  font-size: clamp(35px, 4.5vw, 57px);
-  line-height: 1.45;
-  font-weight: 800;
-}
-
-.hero h1 span {
-  color: #9C783E;
-}
-
+.brand small,
+.main-nav a,
 .hero-content > p,
 .section-heading > p,
 .game-intro > p,
 .leaderboard-layout > div > p {
   color: var(--muted);
-  font-size: 15px;
 }
 
-.hero-content > p {
-  max-width: 510px;
-}
-
-.hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 28px;
-}
-
-.button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  min-height: 47px;
-  padding: 11px 22px;
-  border: 1px solid transparent;
-  border-radius: 13px;
-  font-size: 14px;
-  font-weight: 700;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-}
-
-.button-primary {
-  background: var(--green);
-  color: white;
-}
-
-.button-primary:hover {
-  background: var(--green-dark);
-}
-
-.button-outline {
-  background: transparent;
-  border-color: #C9D6CB;
-  color: var(--green);
-}
-
-.button-light {
-  background: white;
-  color: var(--green);
-}
-
-.button-small {
-  min-height: 40px;
-  padding: 8px 14px;
-  font-size: 12px;
-}
-
-.hero-note {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  margin-top: 25px;
-  color: var(--muted);
-  font-size: 12px;
-}
-
-.status-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #6D9A6E;
-}
-
-/* =========================
-   CHEMISTRY ILLUSTRATION
-========================= */
-
-.hero-art {
-  position: relative;
-  min-height: 370px;
-  display: grid;
-  place-items: center;
-}
-
-.orbit {
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border: 1px solid rgba(27, 77, 62, 0.2);
-  border-radius: 50%;
-}
-
-.orbit-two {
-  width: 225px;
-  height: 225px;
-  border-style: dashed;
-  transform: rotate(35deg);
-}
-
-.chemistry-core {
-  z-index: 2;
-  display: grid;
-  place-content: center;
-  width: 155px;
-  height: 155px;
-  border-radius: 50%;
-  background: var(--green);
-  color: white;
-  text-align: center;
-  font-size: 30px;
-  font-weight: 800;
-  line-height: 1.25;
-  box-shadow: 0 22px 55px rgba(27, 77, 62, 0.22);
-}
-
-.chemistry-core span {
-  color: #E7C98E;
-}
-
-.molecule {
-  position: absolute;
-  z-index: 3;
-  display: grid;
-  place-items: center;
-  width: 65px;
-  height: 65px;
-  border: 1px solid #E8DFC9;
-  border-radius: 20px;
-  background: white;
-  color: var(--green);
-  font-weight: 800;
-  box-shadow: var(--shadow);
-}
-
-.molecule-one {
-  top: 25px;
-  right: 18%;
-}
-
-.molecule-two {
-  bottom: 37px;
-  right: 20%;
-  background: var(--cream);
-}
-
-.molecule-three {
-  top: 43%;
-  left: 8%;
-}
-
-.floating-label {
-  position: absolute;
-  padding: 6px 13px;
-  border: 1px solid var(--line);
-  border-radius: 30px;
-  background: white;
-  color: var(--green);
-  font-size: 12px;
-  box-shadow: var(--shadow);
-}
-
-.label-top {
-  top: 12%;
-  left: 17%;
-}
-
-.label-bottom {
-  right: 7%;
-  bottom: 8%;
-}
-
-/* =========================
-   STUDENT NAME FORM
-========================= */
-
-.welcome-section {
-  padding-block: 42px;
-}
-
-.welcome-card {
-  display: grid;
-  grid-template-columns: 1fr 0.8fr;
-  gap: 35px;
-  align-items: center;
-  padding: 32px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: white;
-  box-shadow: var(--shadow);
-}
-
-.welcome-card h2 {
-  margin: 0;
-  color: var(--green);
-  font-size: 24px;
-}
-
-.welcome-card p {
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 13px;
-}
-
-.name-form {
-  display: grid;
-  gap: 10px;
-}
-
-.name-form label {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.name-form input {
-  width: 100%;
-  min-height: 48px;
-  padding: 12px 15px;
-  border: 1px solid #DCE4DC;
-  border-radius: 12px;
-  background: #FCFDFB;
-  color: var(--ink);
-}
-
-.name-form input:focus {
-  border-color: var(--green);
-  outline: 2px solid rgba(27, 77, 62, 0.1);
-}
-
-.form-message {
-  min-height: 20px;
-  margin: 0;
-  font-size: 12px;
-}
-
-/* =========================
-   SECTION HEADINGS
-========================= */
-
-.section-heading {
-  max-width: 650px;
-  margin: 0 auto 35px;
-  text-align: center;
-}
-
-.section-heading h2,
-.game-intro h2,
-.leaderboard-layout h2 {
-  margin: 0;
-  color: var(--green-dark);
-  font-size: clamp(27px, 3vw, 37px);
-  line-height: 1.5;
-}
-
-.section-heading > p {
-  margin-bottom: 0;
-}
-
-/* =========================
-   ACTIVITY CARDS
-========================= */
-
-.activity-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
-}
-
-.activity-card {
-  padding: 27px;
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: white;
-  box-shadow: 0 8px 24px rgba(27, 77, 62, 0.04);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.activity-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow);
-}
-
-.activity-icon {
-  display: grid;
-  place-items: center;
-  width: 57px;
-  height: 57px;
-  margin-bottom: 20px;
-  border-radius: 17px;
-  font-size: 25px;
-  font-weight: 800;
-}
-
+.menu-toggle,
 .icon-green {
   background: var(--green-light);
   color: var(--green);
 }
 
-.icon-gold {
-  background: var(--cream);
-  color: #927037;
+.hero {
+  background:
+    radial-gradient(circle at 80% 20%,
+      rgba(22, 119, 255, 0.14), transparent 30%),
+    linear-gradient(135deg, #F8FBFF 0%, #EAF2FF 100%);
 }
 
-.icon-blue {
-  background: var(--blue);
-  color: #426A9A;
-  font-size: 17px;
-}
-
+.eyebrow,
 .card-number {
-  color: #9B8C70;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.activity-card h3 {
-  margin: 7px 0;
   color: var(--green);
-  font-size: 21px;
 }
 
-.activity-card p {
-  min-height: 70px;
-  color: var(--muted);
-  font-size: 13px;
+.hero h1,
+.section-heading h2,
+.game-intro h2,
+.leaderboard-layout h2 {
+  color: var(--green-dark);
 }
 
-.text-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  padding: 5px 0;
-  border: 0;
-  background: transparent;
+.hero h1 span {
   color: var(--green);
-  font-size: 13px;
-  font-weight: 800;
 }
 
-.text-link span {
-  transition: transform 0.2s;
+.button-primary {
+  background: var(--green);
+  color: #FFFFFF;
 }
 
-.text-link:hover span {
-  transform: translateX(-4px);
+.button-primary:hover {
+  background: #0D5ED7;
 }
 
-/* =========================
-   QUIZ SECTION
-========================= */
-
-.game-section {
-  background: #F0F4EF;
-}
-
-.game-layout {
-  display: grid;
-  grid-template-columns: 0.75fr 1.25fr;
-  align-items: start;
-  gap: 55px;
-}
-
-.game-intro {
-  padding-top: 25px;
-}
-
-.game-intro > p {
-  max-width: 370px;
-}
-
-.mini-stat {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-top: 22px;
-  color: #56685D;
-  font-size: 13px;
-}
-
-.stat-number {
-  display: grid;
-  place-items: center;
-  width: 43px;
-  height: 43px;
-  border: 1px solid #D4DFD4;
-  border-radius: 12px;
-  background: white;
+.button-outline {
+  border-color: #B9CFF2;
   color: var(--green);
-  font-weight: 800;
 }
 
-.game-panel {
-  min-height: 360px;
-  padding: 28px;
-  border: 1px solid #E1E8E0;
-  border-radius: var(--radius);
-  background: white;
+.button-light {
+  background: var(--cream);
+  color: var(--green-dark);
+}
+
+.status-dot {
+  background: var(--gold);
+}
+
+.orbit {
+  border-color: rgba(22, 119, 255, 0.25);
+}
+
+.chemistry-core {
+  background: var(--green-dark);
+  box-shadow: 0 22px 55px rgba(16, 27, 63, 0.22);
+}
+
+.chemistry-core span {
+  color: #16A36A;
+}
+
+.molecule {
+  border-color: var(--line);
+  background: #FFFFFF;
+  color: var(--green);
+}
+
+.molecule-two {
+  background: #EAF2FF;
+}
+
+.floating-label {
+  border-color: var(--line);
+  background: #FFFFFF;
+  color: var(--green-dark);
+}
+
+.welcome-card,
+.activity-card,
+.game-panel,
+.leaderboard-card {
+  border-color: var(--line);
+  background: #FFFFFF;
   box-shadow: var(--shadow);
 }
 
-.panel-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding-bottom: 18px;
-  border-bottom: 1px solid var(--line);
-}
-
-.panel-label {
-  color: var(--green);
-  font-size: 14px;
-  font-weight: 800;
-}
-
-.panel-tag {
-  padding: 5px 10px;
-  border-radius: 20px;
-  background: var(--cream);
-  color: #896A32;
-  font-size: 10px;
-}
-
-.quiz-start,
-.empty-game {
-  display: grid;
-  justify-items: center;
-  align-content: center;
-  min-height: 265px;
-  text-align: center;
-}
-
-.start-symbol,
-.empty-icon {
-  color: var(--gold);
-  font-size: 43px;
-}
-
-.quiz-start h3,
-.empty-game h3 {
-  margin: 8px 0 0;
-  color: var(--green);
-}
-
-.quiz-start p,
-.empty-game p {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* Questions and answers */
-
-.question-card {
-  padding-top: 22px;
-}
-
-.question-progress {
-  color: #9B7B44;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.question-card h3 {
-  margin: 9px 0 22px;
+.welcome-card h2,
+.name-form input:focus,
+.element-symbol {
   color: var(--green-dark);
-  font-size: 21px;
-  line-height: 1.7;
 }
 
-.answer-options {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+.name-form input {
+  border-color: var(--line);
+  background: #F8FBFF;
+}
+
+.name-form input:focus {
+  border-color: var(--green);
+  outline-color: rgba(22, 119, 255, 0.15);
+}
+
+.icon-gold {
+  background: #E5F7EE;
+  color: #128452;
+}
+
+.icon-blue {
+  background: #EAF2FF;
+  color: #1677FF;
+}
+
+.game-section {
+  background: #EAF2FF;
+}
+
+.stat-number {
+  border-color: var(--line);
+  color: var(--green);
 }
 
 .answer-btn {
-  min-height: 49px;
-  padding: 10px 13px;
-  border: 1px solid #DCE5DD;
-  border-radius: 12px;
-  background: #FBFCF9;
-  color: var(--ink);
-  font-size: 13px;
-  transition: background 0.2s, border-color 0.2s;
+  border-color: var(--line);
+  background: #F8FBFF;
+  color: var(--green-dark);
 }
 
 .answer-btn:hover:not(:disabled) {
   border-color: var(--green);
-  background: var(--green-light);
+  background: #EAF2FF;
 }
 
 .answer-btn.correct {
-  border-color: #4E8C64;
-  background: #E7F4E9;
-  color: #245D38;
+  border-color: #16A36A;
+  background: #E5F7EE;
+  color: #116B46;
 }
 
 .answer-btn.incorrect {
-  border-color: #D28A7F;
-  background: #FCEDE9;
-  color: #8B382D;
-}
-
-.feedback {
-  min-height: 27px;
-  margin: 14px 0 0;
-  color: var(--green);
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.quiz-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 18px;
+  border-color: #D9485F;
+  background: #FFF0F2;
+  color: #A32338;
 }
 
 .progress-track {
-  height: 6px;
-  margin-top: 16px;
-  overflow: hidden;
-  border-radius: 20px;
-  background: #E9EEE8;
+  background: #DCE6F5;
 }
 
 .progress-fill {
-  height: 100%;
-  border-radius: 20px;
-  background: var(--gold);
-  transition: width 0.25s;
+  background: var(--green);
 }
 
-.result-card {
-  padding-top: 25px;
-  text-align: center;
-}
-
+.panel-label,
 .result-score {
-  margin: 15px 0;
   color: var(--green);
-  font-size: 45px;
-  font-weight: 800;
 }
 
-.result-card p {
-  color: var(--muted);
+.panel-tag {
+  background: #EAF2FF;
+  color: var(--green-dark);
 }
-
-/* =========================
-   EXTRA GAMES
-========================= */
-
-.secondary-panel {
-  max-width: 800px;
-  margin-inline: auto;
-}
-
-.element-symbol {
-  display: grid;
-  place-items: center;
-  width: 100px;
-  height: 100px;
-  margin: 22px auto;
-  border: 2px solid var(--gold);
-  border-radius: 20px;
-  background: var(--cream);
-  color: var(--green);
-  font-size: 42px;
-  font-weight: 800;
-}
-
-.game-subtitle {
-  color: var(--muted);
-  font-size: 13px;
-}
-
-/* =========================
-   LEADERBOARD
-========================= */
 
 .leaderboard-section {
-  background: white;
-}
-
-.leaderboard-layout {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
-  align-items: start;
-  gap: 55px;
-}
-
-.privacy-note {
-  padding: 12px;
-  border-right: 3px solid var(--gold);
-  background: #FAF8F0;
-  font-size: 12px !important;
-}
-
-.leaderboard-card {
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  background: white;
-}
-
-.leaderboard-header,
-.leaderboard-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 15px;
-  padding: 15px 20px;
+  background: #F8FBFF;
 }
 
 .leaderboard-header {
-  background: var(--green);
-  color: white;
-  font-size: 12px;
-  font-weight: 700;
+  background: var(--green-dark);
+  color: #FFFFFF;
 }
 
 .leaderboard-row {
-  border-bottom: 1px solid var(--line);
-  color: #48584E;
-  font-size: 13px;
+  border-bottom-color: var(--line);
 }
-
-.leaderboard-row:last-child {
-  border-bottom: 0;
-}
-
-.leaderboard-row strong {
-  color: var(--green);
-  white-space: nowrap;
-}
-
-.empty-state {
-  padding: 22px;
-  color: var(--muted);
-  text-align: center;
-  font-size: 13px;
-}
-
-/* =========================
-   CLOSING SECTION
-========================= */
 
 .closing-section {
-  padding-block: 65px;
-  background:
-    radial-gradient(
-      circle at 80% 20%,
-      rgba(200, 162, 97, 0.15),
-      transparent 30%
-    ),
-    var(--green);
-  color: white;
-  text-align: center;
+  background: var(--green-dark);
+  color: #F8FBFF;
 }
 
-.closing-symbol {
-  color: #E3C17F;
-  font-size: 35px;
+.closing-section p {
+  color: #DCE6F5;
 }
-
-.closing-inner h2 {
-  margin: 8px 0;
-  font-size: clamp(27px, 4vw, 40px);
-}
-
-.closing-inner p {
-  margin-bottom: 25px;
-  color: #D7E4D9;
-  font-size: 14px;
-}
-
-/* =========================
-   FOOTER
-========================= */
 
 .site-footer {
-  padding-block: 22px;
-  background: var(--green-dark);
-  color: #D7E2D8;
+  background: #0A122D;
+  color: #DCE6F5;
 }
 
-.footer-inner {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  font-size: 12px;
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline-color: var(--gold);
 }
-
-/* =========================
-   TABLETS AND MOBILE
-========================= */
 
 @media (max-width: 800px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-
-  .hero-content {
-    text-align: center;
-  }
-
-  .hero-content > p {
-    margin-inline: auto;
-  }
-
-  .hero-actions,
-  .hero-note {
-    justify-content: center;
-  }
-
-  .hero-art {
-    min-height: 310px;
-  }
-
-  .activity-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .activity-card p {
-    min-height: auto;
-  }
-
-  .game-layout,
-  .leaderboard-layout,
-  .welcome-card {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .game-intro {
-    padding-top: 0;
-  }
-
-  .welcome-card {
-    padding: 24px;
-  }
-
-  /* Mobile navigation */
-
   .main-nav {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    display: none;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 0;
-    padding: 10px 20px 18px;
-    border-bottom: 1px solid var(--line);
-    background: white;
-  }
-
-  .main-nav.open {
-    display: flex;
-  }
-
-  .main-nav a {
-    padding: 12px 5px;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-
-  .brand-logo {
-    width: 46px;
-    height: 46px;
-  }
-
-  .brand strong {
-    font-size: 14px;
-  }
-
-  .brand small {
-    font-size: 10px;
-  }
-}
-
-/* =========================
-   SMALL MOBILE SCREENS
-========================= */
-
-@media (max-width: 480px) {
-  .container {
-    width: calc(100% - 28px);
-  }
-
-  .section-space {
-    padding-block: 52px;
-  }
-
-  .hero-grid {
-    padding-block: 45px;
-  }
-
-  .hero h1 {
-    font-size: 34px;
-  }
-
-  .hero-art {
-    min-height: 270px;
-  }
-
-  .orbit {
-    width: 235px;
-    height: 235px;
-  }
-
-  .orbit-two {
-    width: 180px;
-    height: 180px;
-  }
-
-  .chemistry-core {
-    width: 125px;
-    height: 125px;
-    font-size: 25px;
-  }
-
-  .molecule {
-    width: 53px;
-    height: 53px;
-    border-radius: 16px;
-  }
-
-  .game-panel {
-    padding: 18px;
-  }
-
-  .answer-options {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .brand {
-    gap: 8px;
-  }
-
-  .brand-logo {
-    width: 40px;
-    height: 40px;
-  }
-
-  .brand strong {
-    font-size: 12px;
-  }
-
-  .brand small {
-    font-size: 9px;
-  }
-
-  .header-inner {
-    gap: 10px;
+    background: #F8FBFF;
+    border-bottom-color: var(--line);
   }
 }
