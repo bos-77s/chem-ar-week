@@ -5,229 +5,254 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#101B3F">
-  <meta name="description" content="أسبوع الكيمياء العربي: اكتشف الكيمياء من خلال الألعاب والتحديات التعليمية.">
-  <title>أسبوع الكيمياء العربي | اكتشف عالم الكيمياء</title>
+  <meta name="description" content="موقع أسبوع الكيمياء العربي: اكتشف الكيمياء من خلال التجارب والتفاعلات والمختبر التفاعلي.">
+  <title>أسبوع الكيمياء العربي | مختبر المستقبل</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-
-<header class="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="#home" aria-label="العودة إلى الرئيسية">
-      <img
-        class="brand-logo"
-        src="images/school-logo.png"
-        alt="شعار المدرسة"
-        width="52"
-        height="52"
-      >
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="الصفحة الرئيسية">
+      <img src="images/school-logo.png" alt="شعار المدرسة"
+           class="school-logo"
+           onerror="this.style.display='none'">
       <span>
         <strong>أسبوع الكيمياء العربي</strong>
-        <small>اكتشف العلم بطريقة مختلفة</small>
+        <small>اكتشف العلم بالتجربة</small>
       </span>
     </a>
-
-    <button class="menu-toggle" id="menuToggle"
-      aria-label="فتح القائمة" aria-expanded="false" type="button">
-      ☰
-    </button>
-
-    <nav class="main-nav" id="mainNav">
+    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">☰</button>
+    <nav class="nav-links" id="navLinks">
       <a href="#home">الرئيسية</a>
-      <a href="#activities">الأنشطة</a>
-      <a href="#quiz">التحدي العلمي</a>
-      <a href="#leaderboard-section">لوحة النتائج</a>
+      <a href="#lab">المختبر التفاعلي</a>
+      <a href="#experiments">التجارب</a>
+      <a href="#quiz">اختبر معلوماتك</a>
     </nav>
-  </div>
-</header>
+  </header>
 
-<main>
-  <section class="hero" id="home">
-    <div class="container hero-grid">
+  <main>
+    <section class="hero" id="home">
       <div class="hero-content">
-        <span class="eyebrow">العلم يبدأ بسؤال</span>
-        <h1>الكيمياء ليست مجرد معادلات، بل <span>اكتشافات تغيّر العالم.</span></h1>
-        <p>
-          استكشف العناصر، واختبر معلوماتك، واكتشف كيف تساعد الكيمياء
-          في حماية البيئة وصناعة مستقبل أفضل.
-        </p>
+        <span class="eyebrow">🧪 أسبوع الكيمياء العربي</span>
+        <h1>العلم ليس مجرد معادلة،<br><span>بل تجربة تكتشفها!</span></h1>
+        <p>ادخل عالم الكيمياء، جرّب التفاعلات، واكتشف كيف تتحول المواد من حولنا إلى قصص علمية مذهلة.</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#activities">ابدأ الاستكشاف</a>
-          <a class="button button-outline" href="#quiz">اختبر معلوماتك</a>
+          <a class="button button-primary" href="#lab">ابدأ التجربة <span>←</span></a>
+          <a class="button button-outline" href="#experiments">اكتشف التجارب</a>
         </div>
-        <div class="hero-note">
-          <span class="status-dot"></span>
-          تعلّم · جرّب · اكتشف
+        <div class="hero-facts">
+          <div><strong>01</strong><span>تعلّم</span></div>
+          <div><strong>02</strong><span>جرّب</span></div>
+          <div><strong>03</strong><span>اكتشف</span></div>
         </div>
       </div>
-
-      <div class="hero-art" aria-label="رموز كيميائية">
+      <div class="hero-art" aria-label="رسمة توضيحية لمختبر كيميائي">
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
         <div class="molecule molecule-one">H₂O</div>
         <div class="molecule molecule-two">CO₂</div>
-        <div class="molecule molecule-three">O₂</div>
-        <div class="chemistry-core">CHEM<br><span>ISTRY</span></div>
-        <div class="floating-label label-top">العناصر</div>
-        <div class="floating-label label-bottom">التفاعلات</div>
+        <div class="flask">
+          <div class="flask-neck"></div>
+          <div class="flask-body">
+            <div class="liquid"></div>
+            <span class="bubble bubble-one"></span>
+            <span class="bubble bubble-two"></span>
+            <span class="bubble bubble-three"></span>
+          </div>
+        </div>
+        <span class="spark spark-one">✦</span>
+        <span class="spark spark-two">✧</span>
+        <span class="art-caption">SCIENCE IN ACTION</span>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="welcome-section section-space">
-    <div class="container welcome-card">
-      <div>
-        <span class="eyebrow">قبل أن تبدأ</span>
-        <h2>ما الاسم الذي نضعه على لوحة المستكشفين؟</h2>
-        <p>أدخل اسمك ليظهر مع نتيجتك في لوحة المتصدرين على هذا الجهاز.</p>
-      </div>
-
-      <form id="nameForm" class="name-form">
-        <label for="studentName">اسم الطالب أو الطالبة</label>
-        <input id="studentName" name="studentName" type="text"
-          maxlength="30" placeholder="اكتب اسمك هنا" autocomplete="nickname">
-        <button class="button button-primary" type="submit">حفظ الاسم</button>
-        <p id="nameMessage" class="form-message" aria-live="polite"></p>
-      </form>
-    </div>
-  </section>
-
-  <section class="section-space" id="activities">
-    <div class="container">
+    <section class="intro section-wrap">
       <div class="section-heading">
-        <span class="eyebrow">اختر مغامرتك</span>
-        <h2>محطاتك العلمية</h2>
-        <p>ثلاث تجارب تفاعلية، وكل واحدة تكشف جانبًا مختلفًا من الكيمياء.</p>
+        <span class="eyebrow">CHEMISTRY IS EVERYWHERE</span>
+        <h2>الكيمياء حولك في كل مكان</h2>
+        <p>من الماء الذي نشربه إلى الهواء الذي نتنفسه، تساعدنا الكيمياء على فهم العالم وتطوير حلول للمستقبل.</p>
       </div>
-
-      <div class="activity-grid">
-        <article class="activity-card">
-          <div class="activity-icon icon-green">?</div>
-          <span class="card-number">01 / تحدٍّ</span>
-          <h3>تحدي الكيمياء</h3>
-          <p>أجب عن أسئلة علمية قصيرة واجمع أكبر عدد من النقاط.</p>
-          <a href="#quiz" class="text-link">ابدأ التحدي <span>←</span></a>
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon green-icon">⚗️</div>
+          <h3>مختبر تفاعلي</h3>
+          <p>غيّر المواد وشاهد كيف تؤثر اختياراتك في نتيجة التجربة الافتراضية.</p>
+          <a href="#lab">جرّب الآن ←</a>
         </article>
-
-        <article class="activity-card">
-          <div class="activity-icon icon-gold">H</div>
-          <span class="card-number">02 / عناصر</span>
-          <h3>اكتشف العنصر</h3>
-          <p>طابق الرمز الكيميائي مع اسم العنصر الصحيح.</p>
-          <button class="text-link" id="openElementGame" type="button">
-            اكتشف العناصر <span>←</span>
-          </button>
+        <article class="feature-card">
+          <div class="feature-icon blue-icon">🧫</div>
+          <h3>تجارب علمية</h3>
+          <p>تعرّف على تجارب تعليمية واشرح ما يحدث فيها بلغة علمية بسيطة.</p>
+          <a href="#experiments">استكشف التجارب ←</a>
         </article>
-
-        <article class="activity-card">
-          <div class="activity-icon icon-blue">CO₂</div>
-          <span class="card-number">03 / بيئة</span>
-          <h3>أمسك ما لا تراه</h3>
-          <p>تعرف على الكربون وانبعاثاته، واختر التصرف الأفضل للبيئة.</p>
-          <button class="text-link" id="openCarbonGame" type="button">
-            ابدأ المهمة <span>←</span>
-          </button>
+        <article class="feature-card">
+          <div class="feature-icon purple-icon">🧠</div>
+          <h3>تحدي المعرفة</h3>
+          <p>اختبر فهمك للمفاهيم الكيميائية واحصل على نتيجتك فورًا.</p>
+          <a href="#quiz">ابدأ التحدي ←</a>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="game-section section-space" id="quiz">
-    <div class="container game-layout">
-      <div class="game-intro">
-        <span class="eyebrow">المحطة الأولى</span>
-        <h2>هل أنت مستعد للتحدي؟</h2>
-        <p>خمسة أسئلة تختبر معرفتك بالرموز والعناصر والمفاهيم الكيميائية.</p>
-        <div class="mini-stat">
-          <span class="stat-number">05</span>
-          <span>أسئلة علمية</span>
+    <section class="lab-section" id="lab">
+      <div class="section-wrap">
+        <div class="section-heading">
+          <span class="eyebrow">VIRTUAL LABORATORY</span>
+          <h2>مختبرك بين يديك</h2>
+          <p>اختر مادتين، ثم شغّل المحاكاة لمعرفة النتيجة التعليمية المتوقعة.</p>
         </div>
-        <div class="mini-stat">
-          <span class="stat-number">01</span>
-          <span>فرصة لإثبات معرفتك</span>
-        </div>
-      </div>
 
-      <div class="game-panel">
-        <div class="panel-top">
-          <span class="panel-label">التحدي العلمي</span>
-          <span class="panel-tag">اختيار من متعدد</span>
-        </div>
-        <div id="quizContainer">
-          <div class="quiz-start">
-            <div class="start-symbol">⚗</div>
-            <h3>لنبدأ التجربة!</h3>
-            <p>اختر الإجابة الصحيحة لكل سؤال.</p>
-            <button class="button button-primary" id="startQuiz" type="button">
-              ابدأ الاختبار
-            </button>
+        <div class="lab-panel">
+          <div class="lab-topbar">
+            <div class="window-dots"><i></i><i></i><i></i></div>
+            <span>CHEM LAB / 001</span>
+            <span class="lab-status"><i></i> محاكاة تعليمية</span>
+          </div>
+
+          <div class="lab-content">
+            <div class="lab-controls">
+              <label for="substanceA">المادة الأولى</label>
+              <select id="substanceA">
+                <option value="vinegar">الخل (حمض الأسيتيك المخفف)</option>
+                <option value="water">الماء</option>
+                <option value="bakingSoda">بيكربونات الصوديوم</option>
+                <option value="redCabbage">مستخلص الملفوف الأحمر</option>
+              </select>
+
+              <div class="mix-symbol">+</div>
+
+              <label for="substanceB">المادة الثانية</label>
+              <select id="substanceB">
+                <option value="bakingSoda">بيكربونات الصوديوم</option>
+                <option value="vinegar">الخل (حمض الأسيتيك المخفف)</option>
+                <option value="water">الماء</option>
+                <option value="redCabbage">مستخلص الملفوف الأحمر</option>
+              </select>
+
+              <button class="button button-primary full-button" id="mixButton">
+                ▶ شغّل المحاكاة
+              </button>
+              <button class="reset-button" id="resetLab">إعادة ضبط المختبر ↻</button>
+            </div>
+
+            <div class="lab-visual">
+              <div class="lab-grid"></div>
+              <div class="beaker" id="beaker">
+                <div class="beaker-liquid" id="beakerLiquid"></div>
+                <div class="beaker-mark mark-one"></div>
+                <div class="beaker-mark mark-two"></div>
+                <div class="beaker-mark mark-three"></div>
+                <div class="foam" id="foam"></div>
+              </div>
+              <div class="lab-particles" id="labParticles"></div>
+              <p class="lab-visual-caption" id="labVisualCaption">بانتظار اختيار المواد...</p>
+            </div>
+
+            <div class="lab-result" aria-live="polite">
+              <span class="result-label">نتيجة المحاكاة</span>
+              <h3 id="resultTitle">جاهز للتجربة؟</h3>
+              <p id="resultText">اختر مادتين واضغط على زر تشغيل المحاكاة.</p>
+              <div class="result-note">
+                <span>ℹ️</span>
+                <p id="resultNote">هذه محاكاة تعليمية مبسطة وليست قياسًا مخبريًا حقيقيًا.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="extra-games section-space" id="extraGames">
-    <div class="container">
+    <section class="experiments section-wrap" id="experiments">
       <div class="section-heading">
-        <span class="eyebrow">تجارب تفاعلية</span>
-        <h2>جرّب بنفسك</h2>
-        <p>اختر إحدى الألعاب لفتح التجربة هنا.</p>
+        <span class="eyebrow">EXPLORE & LEARN</span>
+        <h2>تجارب تشرح العالم</h2>
+        <p>أفكار علمية للتعرّف على التغيرات الكيميائية وخصائص المواد.</p>
       </div>
-      <div class="game-panel secondary-panel" id="extraGamePanel">
-        <div class="empty-game">
-          <span class="empty-icon">⚗</span>
-          <h3>المختبر بانتظارك</h3>
-          <p>اختر «اكتشف العناصر» أو «أمسك ما لا تراه» من المحطات أعلاه.</p>
+      <div class="experiment-grid">
+        <article class="experiment-card">
+          <div class="experiment-visual visual-bubbles">
+            <span>🫧</span><small>ACID + BASE</small>
+          </div>
+          <div class="experiment-info">
+            <span class="tag">التفاعلات الكيميائية</span>
+            <h3>الخل وبيكربونات الصوديوم</h3>
+            <p>تعرّف على انطلاق غاز ثاني أكسيد الكربون عند تفاعل المادتين.</p>
+            <button class="text-button" data-experiment="vinegar">اعرض تفاصيل التجربة ←</button>
+          </div>
+        </article>
+        <article class="experiment-card">
+          <div class="experiment-visual visual-color">
+            <span>🌈</span><small>ACID–BASE INDICATOR</small>
+          </div>
+          <div class="experiment-info">
+            <span class="tag">الأحماض والقواعد</span>
+            <h3>ألوان الملفوف الأحمر</h3>
+            <p>كيف يمكن لمؤشر طبيعي أن يتغير لونه حسب درجة الحموضة؟</p>
+            <button class="text-button" data-experiment="indicator">اعرض تفاصيل التجربة ←</button>
+          </div>
+        </article>
+        <article class="experiment-card">
+          <div class="experiment-visual visual-water">
+            <span>💧</span><small>H₂O</small>
+          </div>
+          <div class="experiment-info">
+            <span class="tag">خصائص المواد</span>
+            <h3>الماء والذوبان</h3>
+            <p>اكتشف كيف يؤثر نوع المادة في ذوبانها في الماء.</p>
+            <button class="text-button" data-experiment="solubility">اعرض تفاصيل التجربة ←</button>
+          </div>
+        </article>
+      </div>
+      <div class="experiment-detail" id="experimentDetail" hidden aria-live="polite">
+        <button class="detail-close" id="closeDetail" aria-label="إغلاق التفاصيل">×</button>
+        <span class="eyebrow">دليل التجربة</span>
+        <h3 id="detailTitle"></h3>
+        <p id="detailText"></p>
+        <p class="safety-note"><strong>تنبيه السلامة:</strong> هذه الصفحة للتعلّم. لا تخلط مواد مجهولة أو منظفات منزلية، ولا تنفّذ تجربة فعلية إلا بإشراف معلم وفي مكان مجهز.</p>
+      </div>
+    </section>
+
+    <section class="quiz-section" id="quiz">
+      <div class="section-wrap quiz-layout">
+        <div class="quiz-intro">
+          <span class="eyebrow">QUICK KNOWLEDGE CHECK</span>
+          <h2>هل أنت مستكشف كيميائي؟</h2>
+          <p>أجب عن الأسئلة الثلاثة واكتشف نتيجتك.</p>
+          <div class="quiz-decoration">?</div>
+        </div>
+        <div class="quiz-card">
+          <div class="quiz-progress">
+            <span id="questionCounter">السؤال 1 من 3</span>
+            <div class="progress-track"><div id="progressBar"></div></div>
+          </div>
+          <h3 id="questionText">ما الغاز الذي قد ينتج عند تفاعل الخل مع بيكربونات الصوديوم؟</h3>
+          <div class="quiz-options" id="quizOptions">
+            <button class="quiz-option" data-answer="0">الأكسجين</button>
+            <button class="quiz-option" data-answer="1">ثاني أكسيد الكربون</button>
+            <button class="quiz-option" data-answer="2">الهيدروجين</button>
+          </div>
+          <p id="quizFeedback" class="quiz-feedback" aria-live="polite"></p>
+          <button class="button button-primary full-button" id="nextQuestion" disabled>السؤال التالي ←</button>
+          <div id="quizFinal" hidden>
+            <h3 id="finalScore"></h3>
+            <p id="finalMessage"></p>
+            <button class="button button-primary full-button" id="restartQuiz">أعد التحدي ↻</button>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <section class="leaderboard-section section-space" id="leaderboard-section">
-    <div class="container leaderboard-layout">
-      <div>
-        <span class="eyebrow">إنجازات المستكشفين</span>
-        <h2>لوحة المتصدرين</h2>
-        <p>أفضل النتائج المسجلة في هذا المتصفح.</p>
-        <p class="privacy-note">
-          ملاحظة: النتائج محفوظة على الجهاز نفسه، ولا تُرسل إلى قاعدة بيانات مشتركة.
-        </p>
-        <button class="button button-outline button-small"
-          id="clearResults" type="button">
-          مسح النتائج المحفوظة
-        </button>
-      </div>
+    <section class="closing section-wrap">
+      <span class="closing-icon">✦</span>
+      <h2>كل سؤال علمي هو بداية اكتشاف جديد.</h2>
+      <p>لاحظ، اسأل، اختبر، ثم فسّر ما تراه.</p>
+      <a class="button button-primary" href="#lab">عد إلى المختبر ↑</a>
+    </section>
+  </main>
 
-      <div class="leaderboard-card">
-        <div class="leaderboard-header">
-          <span>الترتيب والاسم</span>
-          <span>النتيجة</span>
-        </div>
-        <div id="leaderboard" aria-live="polite">
-          <p class="empty-state">لا توجد نتائج بعد. كن أول المتنافسين!</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="closing-section">
-    <div class="container closing-inner">
-      <span class="closing-symbol">✳</span>
-      <h2>وراء كل اكتشاف سؤال.</h2>
-      <p>واصل الفضول، فالعلم يبدأ بالملاحظة والتجربة.</p>
-      <a class="button button-light" href="#home">العودة إلى البداية ↑</a>
-    </div>
-  </section>
-</main>
-
-<footer class="site-footer">
-  <div class="container footer-inner">
-    <span>أسبوع الكيمياء العربي</span>
-    <span>التعلّم بالتجربة والاكتشاف</span>
-  </div>
-</footer>
-
+  <footer class="site-footer">
+    <p>أسبوع الكيمياء العربي · تجربة تعليمية تفاعلية</p>
+    <a href="#home">العودة إلى الأعلى ↑</a>
+  </footer>
 </body>
 </html>
