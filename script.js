@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       link.addEventListener("click", () => {
         navLinks.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "فتح القائمة");
       });
     });
   }
