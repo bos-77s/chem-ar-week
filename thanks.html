@@ -1,0 +1,578 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>شكر وتقدير | أسبوع الكيمياء العربي</title>
+
+  <meta
+    name="description"
+    content="صفحة شكر وتقدير لفريق العمل الذي ساهم في تطوير موقع أسبوع الكيمياء العربي."
+  >
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --background: #0b1224;
+      --surface: #111d33;
+      --green: #83d9ae;
+      --white: #f5f7fb;
+      --muted: #b4c0d3;
+      --line: rgba(131, 217, 174, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Tajawal", sans-serif;
+      color: var(--white);
+      background:
+        radial-gradient(
+          ellipse at 15% 15%,
+          rgba(54, 105, 132, 0.18),
+          transparent 42%
+        ),
+        radial-gradient(
+          ellipse at 85% 75%,
+          rgba(54, 145, 105, 0.12),
+          transparent 40%
+        ),
+        var(--background);
+      line-height: 1.9;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+      padding: 34px 0 28px;
+    }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 65px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--green);
+      background: rgba(131, 217, 174, 0.07);
+      font-size: 1.25rem;
+    }
+
+    .back-link {
+      text-decoration: none;
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .back-link:hover {
+      color: var(--green);
+      border-color: var(--green);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 55px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(131, 217, 174, 0.06);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(131, 217, 174, 0.6);
+    }
+
+    h1 {
+      margin: 22px 0 14px;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      line-height: 1.25;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    h1 span {
+      color: var(--green);
+    }
+
+    .hero-description {
+      margin: 0 auto;
+      max-width: 620px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .team-section {
+      margin-top: 60px;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 7px;
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .flow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .member-card {
+      position: relative;
+      width: 100%;
+      max-width: 310px;
+      padding: 24px 20px;
+      text-align: center;
+      background: rgba(17, 29, 51, 0.86);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .member-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(131, 217, 174, 0.6);
+      background: rgba(20, 37, 59, 0.96);
+    }
+
+    .leader-card {
+      max-width: 360px;
+      padding: 30px 24px;
+      border-color: rgba(131, 217, 174, 0.55);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(131, 217, 174, 0.12),
+          rgba(17, 29, 51, 0.96) 70%
+        );
+    }
+
+    .member-icon {
+      display: grid;
+      place-items: center;
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 13px;
+      border-radius: 18px;
+      color: var(--green);
+      background: rgba(131, 217, 174, 0.09);
+      border: 1px solid var(--line);
+      font-size: 1.55rem;
+    }
+
+    .leader-card .member-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: 22px;
+      font-size: 1.9rem;
+    }
+
+    .member-name {
+      margin: 0;
+      font-size: 1.2rem;
+      line-height: 1.6;
+      font-weight: 800;
+    }
+
+    .leader-card .member-name {
+      font-size: 1.45rem;
+    }
+
+    .member-role {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 4px 12px;
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(131, 217, 174, 0.08);
+      font-size: 0.88rem;
+      font-weight: 600;
+    }
+
+    .member-description {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .connector {
+      position: relative;
+      width: 2px;
+      height: 48px;
+      background: linear-gradient(
+        to bottom,
+        rgba(131, 217, 174, 0.75),
+        rgba(131, 217, 174, 0.18)
+      );
+    }
+
+    .connector::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      border-right: 2px solid var(--green);
+      border-bottom: 2px solid var(--green);
+      transform: translateX(-50%) rotate(45deg);
+    }
+
+    .team-label {
+      margin: 0 0 25px;
+      padding: 8px 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(131, 217, 174, 0.05);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      width: 100%;
+    }
+
+    .team-grid .member-card {
+      max-width: none;
+      min-height: 235px;
+    }
+
+    .team-grid .member-description {
+      max-width: 260px;
+      margin-right: auto;
+      margin-left: auto;
+    }
+
+    .closing {
+      max-width: 760px;
+      margin: 65px auto 25px;
+      padding: 28px 24px;
+      text-align: center;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(17, 29, 51, 0.56);
+    }
+
+    .closing-symbol {
+      color: var(--green);
+      font-size: 1.8rem;
+    }
+
+    .closing h2 {
+      margin: 8px 0;
+      font-size: 1.6rem;
+    }
+
+    .closing p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding-top: 24px;
+      margin-top: 35px;
+      border-top: 1px solid rgba(180, 192, 211, 0.12);
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    footer a {
+      color: var(--green);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 800px) {
+      .team-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .top-bar {
+        margin-bottom: 48px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 28px, 1100px);
+        padding-top: 22px;
+      }
+
+      .top-bar {
+        margin-bottom: 42px;
+      }
+
+      .brand {
+        font-size: 0.9rem;
+      }
+
+      .back-link {
+        padding: 7px 12px;
+        font-size: 0.85rem;
+      }
+
+      .hero {
+        margin-bottom: 42px;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+      }
+
+      .team-section {
+        margin-top: 45px;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .team-grid .member-card {
+        min-height: auto;
+      }
+
+      .member-card {
+        padding: 22px 17px;
+      }
+
+      .closing {
+        margin-top: 45px;
+        padding: 24px 18px;
+      }
+
+      footer {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">⚗</div>
+        <span>أسبوع الكيمياء العربي</span>
+      </div>
+
+      <a class="back-link" href="index.html">
+        العودة إلى الصفحة الرئيسية ←
+      </a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <span class="eyebrow">خلف كل إنجاز فريق</span>
+
+        <h1>
+          شكرًا لكل من <span>صنع الأثر</span>
+        </h1>
+
+        <p class="hero-description">
+          وراء كل تجربة ناجحة فكرة، ووراء كل فكرة أشخاص آمنوا بها.
+          هذه الصفحة تقدير لكل من ساهم بوقته وجهده في تطوير موقع
+          أسبوع الكيمياء العربي، ولكل دور ساعد في تحويل الفكرة إلى واقع.
+        </p>
+      </section>
+
+      <section class="team-section" aria-labelledby="team-title">
+        <div class="section-heading">
+          <h2 id="team-title">فريق العمل</h2>
+          <p>أدوار متكاملة، وهدف واحد.</p>
+        </div>
+
+        <div class="flow">
+
+          <!-- قائد المشروع -->
+          <article class="member-card leader-card">
+            <div class="member-icon" aria-hidden="true">♛</div>
+            <h3 class="member-name">بسام عبد الفتاح</h3>
+            <span class="member-role">قائد المشروع</span>
+            <p class="member-description">
+              قيادة المشروع وتنسيق العمل ومتابعة تطوير الموقع.
+            </p>
+          </article>
+
+          <div class="connector" aria-hidden="true"></div>
+
+          <div class="team-label">أعضاء الفريق</div>
+
+          <!-- بقية الفريق -->
+          <div class="team-grid">
+
+            <article class="member-card">
+              <div class="member-icon" aria-hidden="true">✦</div>
+              <h3 class="member-name">فارس خالد الجهني</h3>
+              <span class="member-role">تصميم واجهة المستخدم</span>
+              <p class="member-description">
+                المساهمة في تنظيم الواجهة وتنسيق العناصر لتكون واضحة وسهلة الاستخدام.
+              </p>
+            </article>
+
+            <article class="member-card">
+              <div class="member-icon" aria-hidden="true">⌘</div>
+              <h3 class="member-name">محمد احمد السيد</h3>
+              <span class="member-role">تطوير الواجهة الأمامية</span>
+              <p class="member-description">
+                المساهمة في بناء مكونات صفحات الموقع وطريقة عرض المحتوى.
+              </p>
+            </article>
+
+            <article class="member-card">
+              <div class="member-icon" aria-hidden="true">▤</div>
+              <h3 class="member-name">بندر خالد الجهني</h3>
+              <span class="member-role">تنظيم المحتوى</span>
+              <p class="member-description">
+                المساهمة في ترتيب محتوى الموقع وتقديم المعلومات بصورة منظمة.
+              </p>
+            </article>
+
+            <article class="member-card">
+              <div class="member-icon" aria-hidden="true">↔</div>
+              <h3 class="member-name">رائد مالك الجهني</h3>
+              <span class="member-role">تجربة المستخدم</span>
+              <p class="member-description">
+                المساهمة في تحسين سهولة التنقل والوصول إلى أقسام الموقع.
+              </p>
+            </article>
+
+            <article class="member-card">
+              <div class="member-icon" aria-hidden="true">⚙</div>
+              <h3 class="member-name">زياد زاهد كلنتن</h3>
+              <span class="member-role">الوظائف التفاعلية</span>
+              <p class="member-description">
+                المساهمة في متابعة العناصر التفاعلية وسلوكها داخل الموقع.
+              </p>
+            </article>
+
+            <article class="member-card">
+              <div class="member-icon" aria-hidden="true">✓</div>
+              <h3 class="member-name">عبد الله معاذ الغفاري</h3>
+              <span class="member-role">اختبار الجودة والتوافق</span>
+              <p class="member-description">
+                المساهمة في مراجعة الصفحات والتحقق من وضوحها على الأجهزة المختلفة.
+              </p>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="closing">
+        <div class="closing-symbol" aria-hidden="true">✧</div>
+        <h2>العلم يبدأ بفكرة، والأثر يصنعه التعاون</h2>
+        <p>
+          شكرًا لكل من ساهم في هذا العمل، ولكل جهد كان جزءًا من الرحلة.
+          ما تحقق هو بداية لما يمكن أن نصنعه معًا.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <span>أسبوع الكيمياء العربي</span>
+      <a href="index.html">العودة للموقع الرئيسي</a>
+      <span>صُنع بالعلم والتعاون ⚗</span>
+    </footer>
+
+  </div>
+</body>
+</html>
