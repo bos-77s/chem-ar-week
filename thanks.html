@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>شكر وتقدير | أسبوع الكيمياء العربي</title>
-  <meta name="description" content="صفحة شكر وتقدير لفريق العمل الذي ساهم في تطوير موقع أسبوع الكيمياء العربي.">
+  <meta name="description" content="صفحة شكر وتقدير للمشرف وفريق العمل الذي ساهم في تطوير موقع أسبوع الكيمياء العربي.">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -201,19 +201,46 @@
       background: rgba(20, 37, 59, 0.96);
     }
 
+    /* بطاقة المشرف */
+    .supervisor-card {
+      max-width: 390px;
+      padding: 30px 24px;
+      border-color: rgba(229, 189, 101, 0.75);
+      background: linear-gradient(
+        145deg,
+        rgba(229, 189, 101, 0.14),
+        rgba(17, 29, 51, 0.96) 70%
+      );
+      box-shadow: 0 12px 35px rgba(229, 189, 101, 0.06);
+    }
+
+    .supervisor-card .member-name {
+      color: var(--gold);
+      font-size: 1.45rem;
+    }
+
+    .supervisor-card .member-role {
+      color: var(--gold);
+      background: rgba(229, 189, 101, 0.1);
+      border-color: rgba(229, 189, 101, 0.3);
+    }
+
+    .supervisor-card:hover {
+      border-color: var(--gold);
+    }
+
+    /* بطاقة قائد المشروع */
     .leader-card {
       max-width: 360px;
       padding: 30px 24px;
       border-color: rgba(131, 217, 174, 0.55);
-      background:
-        linear-gradient(
-          145deg,
-          rgba(131, 217, 174, 0.12),
-          rgba(17, 29, 51, 0.96) 70%
-        );
+      background: linear-gradient(
+        145deg,
+        rgba(131, 217, 174, 0.12),
+        rgba(17, 29, 51, 0.96) 70%
+      );
     }
 
-    /* النجمة الذهبية الموحدة لجميع الأعضاء وقائد المشروع */
     .member-icon {
       display: grid;
       place-items: center;
@@ -251,6 +278,7 @@
       display: inline-block;
       margin-top: 8px;
       padding: 4px 12px;
+      border: 1px solid transparent;
       border-radius: 999px;
       color: var(--green);
       background: rgba(131, 217, 174, 0.08);
@@ -363,7 +391,6 @@
       text-decoration: underline;
     }
 
-    /* مساحة بيضاء للشعار دون تغيير الصورة الأصلية */
     .logo-box {
       display: inline-flex;
       align-items: center;
@@ -450,6 +477,11 @@
         padding: 22px 17px;
       }
 
+      .supervisor-card,
+      .leader-card {
+        padding: 26px 18px;
+      }
+
       .closing {
         margin-top: 45px;
         padding: 24px 18px;
@@ -506,17 +538,29 @@
 
       <section class="team-section" aria-labelledby="team-title">
         <div class="section-heading">
-          <h2 id="team-title">فريق العمل</h2>
+          <h2 id="team-title">فريق أسبوع الكيمياء</h2>
           <p>أدوار متكاملة، وهدف واحد.</p>
         </div>
 
         <div class="flow">
 
+          <!-- المشرف على أسبوع الكيمياء -->
+          <article class="member-card supervisor-card">
+            <div class="member-icon" aria-hidden="true">✦</div>
+            <h3 class="member-name">الأستاذ محمد عادل إبراهيم</h3>
+            <span class="member-role">المشرف على أسبوع الكيمياء</span>
+            <p class="member-description">
+              شكرًا لإشرافه ودعمه لإنجاح أسبوع الكيمياء.
+            </p>
+          </article>
+
+          <div class="connector" aria-hidden="true"></div>
+
           <!-- قائد المشروع -->
           <article class="member-card leader-card">
             <div class="member-icon" aria-hidden="true">★</div>
             <h3 class="member-name">بسام عبد الفتاح</h3>
-            <span class="member-role">قائد المشروع</span>
+            <span class="member-role">قائد المشروع – شعبة ٥</span>
             <p class="member-description">
               قيادة المشروع وتنسيق العمل ومتابعة تطوير الموقع.
             </p>
@@ -531,7 +575,7 @@
             <article class="member-card">
               <div class="member-icon" aria-hidden="true">★</div>
               <h3 class="member-name">فارس خالد الجهني</h3>
-              <span class="member-role">تصميم واجهة المستخدم</span>
+              <span class="member-role">تصميم واجهة المستخدم – شعبة ٥</span>
               <p class="member-description">
                 المساهمة في تنظيم الواجهة وتنسيق العناصر لتكون واضحة وسهلة الاستخدام.
               </p>
@@ -539,8 +583,8 @@
 
             <article class="member-card">
               <div class="member-icon" aria-hidden="true">★</div>
-              <h3 class="member-name">محمد احمد السيد</h3>
-              <span class="member-role">تطوير الواجهة الأمامية</span>
+              <h3 class="member-name">محمد أحمد السيد</h3>
+              <span class="member-role">تطوير الواجهة الأمامية – شعبة ٨</span>
               <p class="member-description">
                 المساهمة في بناء مكونات صفحات الموقع وطريقة عرض المحتوى.
               </p>
@@ -549,7 +593,7 @@
             <article class="member-card">
               <div class="member-icon" aria-hidden="true">★</div>
               <h3 class="member-name">بندر خالد الجهني</h3>
-              <span class="member-role">تنظيم المحتوى</span>
+              <span class="member-role">تنظيم المحتوى – شعبة ٧</span>
               <p class="member-description">
                 المساهمة في ترتيب محتوى الموقع وتقديم المعلومات بصورة منظمة.
               </p>
@@ -558,7 +602,7 @@
             <article class="member-card">
               <div class="member-icon" aria-hidden="true">★</div>
               <h3 class="member-name">رائد مالك الجهني</h3>
-              <span class="member-role">تجربة المستخدم</span>
+              <span class="member-role">تجربة المستخدم – شعبة ٥</span>
               <p class="member-description">
                 المساهمة في تحسين سهولة التنقل والوصول إلى أقسام الموقع.
               </p>
@@ -567,7 +611,7 @@
             <article class="member-card">
               <div class="member-icon" aria-hidden="true">★</div>
               <h3 class="member-name">زياد زاهد كلنتن</h3>
-              <span class="member-role">الوظائف التفاعلية</span>
+              <span class="member-role">الوظائف التفاعلية – شعبة ٦</span>
               <p class="member-description">
                 المساهمة في متابعة العناصر التفاعلية وسلوكها داخل الموقع.
               </p>
@@ -576,7 +620,7 @@
             <article class="member-card">
               <div class="member-icon" aria-hidden="true">★</div>
               <h3 class="member-name">عبد الله معاذ الغفاري</h3>
-              <span class="member-role">اختبار الجودة والتوافق</span>
+              <span class="member-role">اختبار الجودة والتوافق – شعبة ٦</span>
               <p class="member-description">
                 المساهمة في مراجعة الصفحات والتحقق من وضوحها على الأجهزة المختلفة.
               </p>
@@ -589,10 +633,6 @@
       <section class="closing">
         <div class="closing-symbol" aria-hidden="true">✧</div>
         <h2>العلم يبدأ بفكرة، والأثر يصنعه التعاون</h2>
-        <p>
-          شكرًا لكل من ساهم في هذا العمل، ولكل جهد كان جزءًا من الرحلة.
-          ما تحقق هو بداية لما يمكن أن نصنعه معًا.
-        </p>
       </section>
     </main>
 
